@@ -1,2 +1,2 @@
-# memory_check.sh
+# Exercise 1
 First exercise (Bash)
