@@ -18,9 +18,7 @@ while getopts ":c:w:e:" opt
       \? ) 
             echo "Invalid option -$OPTARG"
       ;;
-      : ) 
-            echo "Required parameters are: -c Critical Threshold -w Warning Threshold -e Email Address to send report"
-      ;;
+      
  esac
 done
 
@@ -28,8 +26,30 @@ shift $((OPTIND - 1))
 
   if [[ -n $ct ]] && [[ -n $wt ]] && [[ -n $ea ]] && [[ $ct -gt $wt ]]
     then
-      echo "sample"
-    else
+      echo "Memory Usage: $mem_usg"
+      echo "Critical Threshold: $ct"
+      echo "Warning Threshold: $wt"
+      echo "Email Address: $ea"
+    
+    if [[ $mem_usg -ge $ct ]]
+     then
+      exit 2
+    fi
+    
+    if [[ $mem_usg -ge $wt ]]
+     then
+      if [[ $mem_usg -lt $ct ]]
+       then
+         exit 1
+      fi
+    fi
+    
+    if [[ $mem_usg -lt $wt ]]
+     then
+       exit 0
+    fi
+    
+  else
       echo "Required parameters are:"
       echo "-c Critical Threshold"
       echo "-w Warning Threshold"
