@@ -33,6 +33,15 @@ shift $((OPTIND - 1))
        
          if [ "$mem_usg" -ge "$ct" ]
           then
+            TO=$ea
+            SUBJECT="Subject: $( date '+%Y%m%d %H:%M' ) memory check - critical"
+            MEM_REPORT=$( ps axo %mem,comm,pid | sort -nr | head -n 10 )
+             (
+              echo "To: $TO"
+              echo "Subject: $SUBJECT"
+              echo "Message: $MEM_REPORT"
+             ) | sendmail -t $ea
+             
            exit 2
          fi
          
