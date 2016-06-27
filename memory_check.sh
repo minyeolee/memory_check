@@ -23,9 +23,9 @@ shift $((OPTIND - 1))
 
   if [[ -n $ct ]] && [[ -n $wt ]] && [[ -n $ea ]]
     then
-      echo "Memory Usage: $mem_usg"
-      echo "Critical Threshold: $ct"
-      echo "Warning Threshold: $wt"
+      echo "Memory Usage: $mem_usg%"
+      echo "Critical Threshold: $ct%"
+      echo "Warning Threshold: $wt%"
       echo "Email Address: $ea"
       
      if [[ $ct -gt $wt ]]
