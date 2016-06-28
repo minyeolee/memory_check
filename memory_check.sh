@@ -1,5 +1,7 @@
 #!bin/bash
 #This file was created on 06/22/2016
+#SE Exercise 1/2
+#Written by: Mary Minette Yasay
 
 mem_usg=$( free | grep Mem: | awk '{ printf "%.0f%\n", $3*100/$2}' )
 
